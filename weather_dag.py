@@ -53,6 +53,7 @@ def transform_load_data(task_instance):
         dt = datetime.now().strftime("%d%m%Y%H%M%S")
         filename = 'current_weather_data_boston_' + dt # setting the file name with current date and time
 
+        # AWS credentials to push data into S3
         aws_creds = {
                 "key" : 'XXXXXXXXXXXXXXXXXXX',
                 'secret' : 'XXXXXXXXXXXXXXXXXXX',
@@ -73,7 +74,7 @@ default_args = {
     'retry_delay': timedelta(minutes=2)
 }
 
-
+# creating tasks for Airflow
 with DAG('weather_dag',
          default_args = default_args,
          schedule_interval = '@daily',
